@@ -1,0 +1,96 @@
+\documentclass[a4paper,fleqn]{article}
+\usepackage{standard}
+\geometry{top=30mm,bottom=30mm,left=42mm,right=42mm}
+
+\begin{document}
+  \hrule
+  \medskip
+  \begin{center}
+    \Large
+    \textbf{Quantum Field Theory \\ Exercise Sheet 4}
+  \end{center}
+  \medskip
+  \begin{minipage}[t]{0.45\textwidth}
+    \begin{raggedleft}
+      Markus Pawellek\\
+      markuspawellek@gmail.com\\
+    \end{raggedleft}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\textwidth}
+    Clemens Anschütz\\
+    clemens.anschuetz@uni-jena.de
+  \end{minipage}
+  \medskip
+  \hrule
+  \bigskip
+
+  \section*{Problem 9: Lorentz transformations} % (fold)
+  \label{sec:problem_9_lorentz_transformations}
+
+    If not defined otherwise we will use the Latin alphabet $\set{a,b,c,\ldots}{}$ as a set of dummy indices in the set $I_0\define\set{0,1,2,3}{}$ and the Greek alphabet $\set{α,β,γ,\ldots}{}$ as a set of dummy indices in the set $I\define\set{1,2,3}{}$ for the sum convention of Einstein.
+    We denote the Minkowski metric as follows.
+    \[
+      η \define \roundBrackets{η_{mn}} \define \roundBrackets{η^{mn}} \define \diagonalMatrix{-1,1,1,1}
+    \]
+    \newcommand{\lorentzGroup}{\mathds{L}}
+    We define the Lorentz group $\lorentzGroup$ as a subset of invertible matrices.
+    \[
+      \lorentzGroup \define \set{L \in \mathrm{GL}_4(\setReal)}{\transpose{L}ηL = η}
+    \]
+
+    \paragraph{(1):}
+    Let $L\in\lorentzGroup$ with the following definition for $ω\in\setReal^{4\times 4}$.
+    We say $\infinitesimal{L}$ is the infinitesimal change of $L$.
+    \[
+      L\indices{^m_n} = δ\indices{^m_n}
+      \separate
+      \infinitesimal{L}\indices{^m_n} = ω\indices{^m_n}
+    \]
+    From the definition of the Lorentz group we do know that the following condition has to hold.
+    \[
+      η\indices{_{mn}} = η\indices{_{pq}} L\indices{^p_m} L\indices{^q_n}
+    \]
+    By computing the infinitesimal change, we can directly proof the lemma.
+    \begin{align*}
+      0 &= η\indices{_{pq}} \roundBrackets{ \infinitesimal{L}\indices{^p_m} L\indices{^q_n} + L\indices{^p_m}\infinitesimal{L}\indices{^q_n} } \\
+      &= η\indices{_{pq}} δ\indices{^q_n} ω\indices{^p_m} + η\indices{_{pq}} δ\indices{^p_m} ω\indices{^q_n} \\
+      &= η\indices{_{pn}} ω\indices{^p_m} + η\indices{_{mq}} ω\indices{^q_n} \\
+      &= ω\indices{_{nm}} + ω\indices{_{mn}}
+    \end{align*}
+
+    \paragraph{(2):}
+    Let $L\in\lorentzGroup$ then we do know from the definition of $\lorentzGroup$
+    \[
+      η = \transpose{L}η L
+    \]
+    Now we use some rules for the computation of determinants.
+    The determinant of matrix product is the same as the product of determinants of these matrices.
+    Furthermore the determinant does not change under transposing the given matrix.
+    \begin{align*}
+      \det η &= \det \roundBrackets{\transpose{L}η L} \\
+      &= \det\transpose{L} \cdot \det η \cdot \det L \\
+      &= \det η\cdot\roundBrackets{\det L}^2
+    \end{align*}
+    We divide this equation by $\det η$ and get the following result.
+    \[
+      \roundBrackets{\det L}^2 = 1
+      \quad \implies \quad
+      \det L = \pm 1
+    \]
+
+    Again we use the definition of $\lorentzGroup$.
+    \[
+      η\indices{_{mn}} = η\indices{_{pq}} L\indices{^p_m} L\indices{^q_n}
+    \]
+    We can specialize this.
+    \begin{align*}
+      η_{00} &= η_{pq} L\indices{^p_0} L\indices{^q_0} \\
+      &= η_{00}\roundBrackets{L\indices{^0_0}}^2 + 2 η_{α0} L\indices{^α_0} L\indices{^0_0} + η_{αβ} L\indices{^α_0} L\indices{^β_0}
+    \end{align*}
+
+    % \paragraph{(3):}
+
+  % section problem_9_lorentz_transformations (end)
+
+\end{document}

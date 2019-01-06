@@ -1,0 +1,228 @@
+\documentclass[crop=false,fleqn]{standalone}
+\usepackage{standard}
+\usepackage{multicol}
+
+\allowdisplaybreaks
+
+\begin{document}
+  \section*{Problem 4}
+  % \begin{multicols}{2}
+  If not defined otherwise we will use the Latin alphabet $\set{a,b,c,\ldots}{}$ as a set of dummy indices in the set $I_0\define\set{0,1,2,3}{}$ and the Greek alphabet $\set{α,β,γ,\ldots}{}$ as a set of dummy indices in the set $I\define\set{1,2,3}{}$ for the sum convention of Einstein.
+  We denote the Minkowski metric as follows.
+  \[
+    η \define \roundBrackets{η_{mn}} \define \roundBrackets{η^{mn}} \define \diagonalMatrix{-1,1,1,1}
+  \]
+  Let $\function{A^n}{\setReal^4}{\setReal}$ be a two times continuous differentiable function that denotes one of the electrodynamic potentials and $\function{j^n}{\setReal^4}{\setReal}$ a continuous function which denotes one of the quadruplet currents.
+  \[
+    A \define \roundBrackets{A^n} \reverseDefine \roundBrackets{φ,\vector{A}}
+    \separate
+    j \define \roundBrackets{j^n} \reverseDefine \roundBrackets{ρ,\vector{j}}
+  \]
+  The electric and magnetic field can then be computed as follows.
+  \[
+    \vector{E} \define -\nabla φ - \partial_t \vector{A}
+    \separate
+    \vector{B} \define \nabla \times \vector{A}
+  \]
+  We define the field strength tensor $F$ and its dual $\tilde{F}$ as follows.
+  \[
+    F_{mn} \define \partial_mA_n - \partial_nA_m
+    \separate
+    \tilde{F}^{mn} \define \frac{1}{2}ε^{mnpq}F_{pq}
+  \]
+
+  \paragraph{(1):}
+  For the formulation of the Euler-Lagrange equations it seems to be useful to define the following tensor function.
+  \[
+    \function{\mathscr{X}_{ij}}{\setReal^{4\times 4}}{\setReal}
+    \separate
+    \mathscr{X}_{ij}(x) \define x_{ij} - x_{ji}
+  \]
+  \[
+    \mathscr{X}(x) \define \roundBrackets{\mathscr{X}_{ij}(x)}_{i,j\in I_0} = x - \transpose{x}
+  \]
+  Now we can write the field strength tensor in the following form.
+  \[
+    F_{mn} = \mathscr{X}_{mn}\circ \transpose{\roundBrackets{\jacobian A}} = \mathscr{X}_{mn}\circ \roundBrackets{\partial_iA_j}_{i,j\in I_0}
+  \]
+  Then we formulate the Lagrangian density.
+  \[
+    \function{\mathscr{L}}{\setReal^4\times\setReal^4\times\setReal^{4\times 4}}{\setReal}
+  \]
+  \[
+    \mathscr{L}\roundBrackets{x,a,d} \define -\frac{1}{4}\mathscr{X}_{mn}(d)\mathscr{X}^{mn}(d) + a_mj^m(x)
+  \]
+  The action $\mathscr{S}(A)$ based on the given Lagrangian can then be computed by the following equation.
+  \[
+    \mathscr{S}(A) \define \integral{\setReal^4}{}{\mathscr{L}\roundBrackets{x,A(x),\transpose{\jacobian A}(x)}}{λ(x)}
+  \]
+  Therefore now we can determine the Euler-Lagrange equations.
+  \begin{align*}
+    0 &= \leibnizPartialDerivativeOperatorValue{x_k}{\mathscr{L}(\cdot,x,\cdot)}{\roundBrackets{\cdot,A,\transpose{\jacobian A}}} -
+    \partial_m\boxBrackets{
+      \leibnizPartialDerivativeOperatorValue{x_{mk}}{\mathscr{L}(\cdot,\cdot,x)}{\roundBrackets{\cdot,A,\transpose{\jacobian A}}}
+    }
+  \end{align*}
+  The first part can be easily computed because there is only a linear dependence.
+  \[
+    \leibnizPartialDerivativeOperatorValue{x_k}{\mathscr{L}(\cdot,x,\cdot)}{\roundBrackets{\cdot,A,\transpose{\jacobian A}}} = j^k
+  \]
+  For the second part we will rely on the sum convention.
+  \begin{align*}
+    &\leibnizPartialDerivativeOperatorValue{x_{ab}}{\mathscr{L}(\cdot,\cdot,x)}{\roundBrackets{\cdot,A,\transpose{\jacobian A}}} \\
+    &= -\frac{1}{4}
+    \leibnizPartialDerivativeOperatorValue{x_{ab}}{
+      \mathscr{X}_{mn}(x)\mathscr{X}^{mn}(x)
+    }{\transpose{\jacobian A}} \\
+    &= -\frac{1}{4}\leibnizPartialDerivativeOperatorValue{x_{ab}}{
+      (x_{mn}-x_{nm})η^{mp}η^{nq}(x_{pq} - x_{qp})
+    }{\transpose{\jacobian A}} \\
+    &=
+    \appendValue{
+      -\frac{1}{4} η^{mp} η^{nq} \boxBrackets{\roundBrackets{δ^a_m δ^b_n - δ^a_n δ^b_m}\roundBrackets{x_{pq} - x_{qp}} + \roundBrackets{x_{mn} - x_{nm}}\roundBrackets{δ^a_p δ^b_q - δ^a_q δ^b_p}}
+    }{x = \transpose{\jacobian A}} \\
+    &=
+    \appendValue{
+      -\frac{1}{4}
+      \boxBrackets{\roundBrackets{η^{ap}η^{bq} - η^{bp}η^{aq}}\roundBrackets{x_{pq} - x_{qp}} + \roundBrackets{x_{mn} - x_{nm}}\roundBrackets{η^{ma}η^{nb} - η^{mb}η^{na}}}
+    }{x = \transpose{\jacobian A}} \\
+    &=
+    \appendValue{
+      -\frac{1}{2}
+      \roundBrackets{η^{ap}η^{bq} - η^{bp}η^{aq}}\roundBrackets{x_{pq} - x_{qp}}
+    }{x = \transpose{\jacobian A}} \\
+    &=
+    \appendValue{
+      -\roundBrackets{x^{ab} - x^{ba}}
+    }{x = \transpose{\jacobian A}} \\
+    &= \partial^bA^a - \partial^aA^b = -F^{ab}
+  \end{align*}
+  Now the Euler-Lagrange equations can be rewritten.
+  \[
+    \partial_a F^{ka} = j^k
+  \]
+
+  \paragraph{(2):}
+  We already know that $F$ is given by the following matrix.
+  \[
+    \roundBrackets{F^{mn}}_{m,n\in I_0} =
+    \begin{pmatrix}
+      0 & E_x & E_y & E_z \\
+      -E_x & 0 & B_z & -B_y \\
+      -E_y & -B_z & 0 & B_x \\
+      -E_z & B_y & -B_x & 0
+    \end{pmatrix}
+  \]
+  Applying the result from part one we get the following inhomogeneous Maxwell equations.
+  \begin{align*}
+    \nabla\cdot\vector{E} = ρ
+    \separate
+    -\partial_t E + \nabla\times \vector B = \vector{j}
+  \end{align*}
+  Because there was only one equivalent transformation the inhomogeneous Maxwell equations are indeed equivalent to the Euler-Lagrange equations.
+  \[
+    \left.
+    \begin{aligned}
+      \nabla\cdot\vector{E} &= ρ \\
+      \nabla\times\vector{B} &= \vector{j} + \partial_t\vector{E}
+    \end{aligned}
+    \quad \right\}
+    \quad
+    \iff
+    \quad
+    \partial_n F^{mn} = j^m
+  \]
+
+  \paragraph{(3):}
+  First we will look at the definition of the left hand side of the Bianchi identity.
+  \[
+    \partial_m\tilde{F}^{mn} = \frac{1}{2}ε^{mnpq}\roundBrackets{\partial_m\partial_pA_q - \partial_m\partial_qA_p}
+  \]
+  Interchanging the index $p$ with the index $m$ or the index $q$ with the index $m$ does not change the value of the left hand side.
+  If we again interchange those indices in the Levi-Civita tensor then this tensor will switch its sign.
+  \begin{align*}
+    \partial_m\tilde{F}^{mn} &= \frac{1}{2} ε^{pnmq}\roundBrackets{\partial_p\partial_mA_q - \partial_p\partial_qA_m} = -\frac{1}{2} ε^{mnpq}\roundBrackets{\partial_p\partial_mA_q - \partial_p\partial_qA_m} \\
+    \partial_m\tilde{F}^{mn} &= \frac{1}{2} ε^{qnpm}\roundBrackets{\partial_q\partial_p A_m - \partial_q\partial_m A_p} = -\frac{1}{2}ε^{mnpq}\roundBrackets{\partial_q\partial_pA_m - \partial_q\partial_mA_p}
+  \end{align*}
+  Because $A$ is two times continuous differentiable, we can use the theorem by Schwarz and interchange the order of the partial derivatives.
+  Together with the three equations we already have, the result becomes the following.
+  \begin{align*}
+    \partial_m\tilde{F}^{mn} &= \frac{1}{3}\roundBrackets{\partial_m\tilde{F}^{mn} + \partial_m\tilde{F}^{mn} + \partial_m\tilde{F}^{mn}} \\
+    &= \frac{1}{6}ε^{mnpq}\
+      \begin{aligned}[t]
+        &(\partial_m\partial_pA_q - \partial_m\partial_qA_p - \partial_p\partial_mA_q \\
+        &+\partial_p\partial_qA_m - \partial_q\partial_pA_m + \partial_q\partial_mA_p)
+      \end{aligned}
+      \\
+    &= 0
+  \end{align*}
+
+  \paragraph{(4):}
+  We also know that $\tilde{F}$ is given by the following matrix.
+  \[
+    \roundBrackets{\tilde{F}^{mn}}_{m,n\in I_0} =
+    \begin{pmatrix}
+      0 & B_x & B_y & B_z \\
+      -B_x & 0 & -E_z & E_y \\
+      -B_y & E_z & 0 & -E_x \\
+      -B_z & -E_y & E_x & 0
+    \end{pmatrix}
+  \]
+  Applying the Bianchi identity we get the homogeneous Maxwell equations.
+  \[
+    -\nabla\cdot\vector{B} = 0
+    \separate
+    \nabla\times\vector{E} + \partial_t\vector{B} = 0
+  \]
+  Again we have only transformed the equations to another notation.
+  The homogeneous Maxwell equations are therefore equivalent to the Bianchi identity.
+  \[
+    \left.
+    \begin{aligned}
+      \nabla\cdot\vector{B} &= 0\\
+      \nabla\times\vector{E} &= - \partial_t\vector{B}
+    \end{aligned}
+    \quad
+    \right\}
+    \quad
+    \iff
+    \quad
+    \partial_m \tilde{F}^{mn} = 0
+  \]
+
+  \paragraph{(5):}
+  To deduce the the covariant continuity equation we will again rely on the theorem by Schwarz to interchange the order of the partial derivatives.
+  \begin{align*}
+    \partial_n j^n &= \partial_n\partial_m F^{nm} \\
+    &= \partial_n\partial_m\partial^n A^m - \partial_n\partial_m\partial^m A^n \\
+    &= \partial_n\partial^n\partial_m A^m - \partial_m\partial^m\partial_n A^n \\
+    &= \partial_n\partial^n\partial_m A^m - \partial_n\partial^n\partial_m A^m \\
+    &= 0
+  \end{align*}
+
+  \paragraph{(6):}
+  Let $\function{χ}{\setReal^4}{\setReal}$ be a two times continuous differentiable function.
+  Then we define the transformed potentials $A'_n$.
+  \[
+    A'_n = A_n + \partial_n χ
+  \]
+  Next we will compute the field strength tensor of the transformed potentials again based on Schwarz's theorem.
+  We will see it is invariant under this transformation.
+  \begin{align*}
+    F'_{mn} &= \partial_m A'_n - \partial_n A'_m \\
+    &= \partial_m \roundBrackets{A_n + \partial_n χ} - \partial_n \roundBrackets{A_m + \partial_m χ} \\
+    &= \partial_m A_n - \partial_n A_m + \partial_m\partial_n χ - \partial_n\partial_m χ \\
+    &= F_{mn} + \partial_m\partial_n χ - \partial_m\partial_n χ \\
+    &= F_{mn}
+  \end{align*}
+  Hence, the kinetic part of the Lagrangian is invariant under this transformation, too.
+  For the potential part of the Lagrangian we get the following.
+  \begin{align*}
+    j^mA'_m &= j^m \roundBrackets{A_m + \partial_m χ} \\
+    &= j^m A_m + j^m\partial_m χ
+  \end{align*}
+  Here the function $j^m\partial_m χ$ does not depend on any potential.
+  But we know that we can add an arbitrary function to the Lagrangian without changing the Euler-Lagrange equations.
+  Therefore the Euler-Lagrange equations for the transformed potentials are the same.
+  For these equations we already showed the continuity equation.
+\end{document}

@@ -1,0 +1,223 @@
+\documentclass[10pt,fleqn]{article}
+\usepackage{multicol}
+\usepackage{standard}
+\geometry{a4paper,top=30mm,bottom=30mm,left=30mm,right=30mm}
+
+\begin{document}
+  \hrule
+  \medskip
+  \begin{center}
+    \Large
+    \textbf{Quantum Field Theory \\ Exercise Sheet 4}
+  \end{center}
+  \medskip
+  \begin{minipage}[t]{0.45\textwidth}
+    \begin{raggedleft}
+      Markus Pawellek\\
+      markuspawellek@gmail.com\\
+    \end{raggedleft}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\textwidth}
+    Clemens Anschütz\\
+    clemens.anschuetz@uni-jena.de
+  \end{minipage}
+  \medskip
+  \hrule
+  \bigskip
+
+  \section*{Problem 9: Lorentz transformations} % (fold)
+  \label{sec:problem_9_lorentz_transformations}
+  \begin{multicols}{2}
+
+    \noindent
+    If not defined otherwise we will use the Latin alphabet $\set{a,b,c,\ldots}{}$ as a set of dummy indices in the set $I_0\define\set{0,1,2,3}{}$ and the Greek alphabet $\set{α,β,γ,\ldots}{}$ as a set of dummy indices in the set $I\define\set{1,2,3}{}$ for the sum convention of Einstein.
+    We denote the Minkowski metric as follows.
+    \[
+      η \define \roundBrackets{η_{mn}} \define \roundBrackets{η^{mn}} \define \diagonalMatrix{-1,1,1,1}
+    \]
+    \newcommand{\lorentzGroup}{\mathds{L}}%
+    We define the Lorentz group $\lorentzGroup$ as a subset of the 4-dimensional invertible matrices.
+    \[
+      \lorentzGroup \define \set{L \in \mathrm{GL}_4(\setReal)}{\transpose{L}ηL = η}
+    \]
+
+    \paragraph{(1):}
+    Choose $L\in\lorentzGroup$ with the following definition for an arbitrary $ω\in\setReal^{4\times 4}$.
+    We define $\infinitesimal{L}$ as the infinitesimal change of $L$.
+    \[
+      L\indices{^m_n} = δ\indices{^m_n}
+      \separate
+      \infinitesimal{L}\indices{^m_n} = ω\indices{^m_n}
+    \]
+    From the definition of the Lorentz group we do know that the following condition must hold.
+    \[
+      η\indices{_{mn}} = η\indices{_{pq}} L\indices{^p_m} L\indices{^q_n}
+    \]
+    By computing the infinitesimal alteration of this equation, we can directly proof the lemma.
+    \begin{align*}
+      0 &= η\indices{_{pq}} \roundBrackets{ L\indices{^q_n} \infinitesimal{L}\indices{^p_m} + L\indices{^p_m}\infinitesimal{L}\indices{^q_n} } \\
+      &= η\indices{_{pq}} δ\indices{^q_n} ω\indices{^p_m} + η\indices{_{pq}} δ\indices{^p_m} ω\indices{^q_n} \\
+      &= η\indices{_{pn}} ω\indices{^p_m} + η\indices{_{mq}} ω\indices{^q_n} \\
+      &= ω\indices{_{nm}} + ω\indices{_{mn}}
+    \end{align*}
+
+    \paragraph{(2):}
+    Let $L\in\lorentzGroup$ be an arbitrary Lorentz transformation.
+    Then from the definition of $\lorentzGroup$ we do know the following.
+    \[
+      η = \transpose{L}η L
+    \]
+    Now we use some rules for the computation of determinants.
+    The determinant of a matrix product is the same as the product of the determinants of these matrices.
+    Furthermore the determinant does not change if we transpose the given matrix.
+    \begin{align*}
+      \det η &= \det \roundBrackets{\transpose{L}η L} \\
+      &= \det\transpose{L} \cdot \det η \cdot \det L \\
+      &= \det η\cdot\roundBrackets{\det L}^2
+    \end{align*}
+    We divide this equation by $\det η$ and get the first proposition which should be shown.
+    \[
+      \roundBrackets{\det L}^2 = 1
+      \quad \implies \quad
+      \det L = \pm 1
+    \]
+    For the second proposition we again use the definition of the Lorentz group $\lorentzGroup$.
+    This time the equation will be formulated in index notation.
+    \[
+      η\indices{_{mn}} = η\indices{_{pq}} L\indices{^p_m} L\indices{^q_n}
+    \]
+    In particular we can state the following because $η$ is a diagonal matrix.
+    \begin{align*}
+      -1 &= η_{00} = η_{pq} L\indices{^p_0} L\indices{^q_0} \\
+      &= η_{00}\roundBrackets{L\indices{^0_0}}^2 + η_{αβ} L\indices{^{α}_0} L\indices{^{β}_0} \\
+      &= - \roundBrackets{L\indices{^0_0}}^2 + \roundBrackets{L\indices{^1_0}}^2 + \roundBrackets{L\indices{^2_0}}^2 + \roundBrackets{L\indices{^3_0}}^2
+    \end{align*}
+    By shifting $L\indices{^0_0}$ to the left of this equation and applying the inequality $x^2 \geq 0$ for any real number $x\in\setReal$ the equation becomes
+    \begin{align*}
+      \roundBrackets{L\indices{^0_0}}^2 &= 1 + \roundBrackets{L\indices{^1_0}}^2 + \roundBrackets{L\indices{^2_0}}^2 + \roundBrackets{L\indices{^3_0}}^2 \geq 1
+    \end{align*}
+    This equation is equivalent to the second proposition which should be shown.
+    \[
+      L\indices{^0_0} \geq 1
+      \quad \lor \quad
+      L\indices{^0_0} \leq -1
+    \]
+
+    \paragraph{(3):}
+    We consider the Lorentz transformation $L$ with the following definition.
+    Here we define $η\in\setReal$ to be a real scalar value.
+    \[
+      L \define \exp \roundBrackets{\mathrm{i} η^j \roundBrackets{K\indices{_j^{α}_{β}}}_{α,β}}
+    \]
+    \[
+      η^j \define η δ^j_3
+    \]
+    \[
+      K\indices{_j^{α}_{β}} \define -\mathrm{i} \roundBrackets{ δ^α_0 δ_{jβ} + δ_{0β} δ^α_j }
+    \]
+    First, we compute the argument of the exponent of the supposed Lorentz boost $L$.
+    \begin{align*}
+      S^α_β
+      &\define \mathrm{i} η^j K\indices{_j^{α}_{β}} \\
+      &= η δ^j_3 \roundBrackets{ δ^α_0 δ_{jβ} + δ_{0β} δ^α_j } \\
+      &= η \roundBrackets{ δ^α_0 δ_{3β} + δ_{0β} δ^α_3 }
+    \end{align*}
+    Based on this expression we see that components with the indices $1$ and $2$ can be omitted.
+    Because of the exponential they appear as an identity in the actual result.
+    \[
+      S\define \roundBrackets{S^α_β}_{α,β\in \set{0,3}{}} = η
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0 \\
+      \end{pmatrix}
+    \]
+    To express the exponent we need to compute $S^n$ for every $n\in\setNatural_0$.
+    Let $k\in\setNatural_0$ be arbitrary.
+    Then the following formulas can be easily shown by mathematical induction.
+    \[
+      S^{2k} = η^{2k}
+      \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+      \end{pmatrix}
+      \separate
+      S^{2k+1} = η^{2k+1}
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}
+    \]
+    Now we use these relations and the definition of the exponential to compute $L$.
+    \begin{align*}
+      &\roundBrackets{L^α_β}_{α,β\in \set{0,3}{}}
+      = \sum_{n=0}^\infty \frac{S^n}{n!} \\
+      &= \sum_{k=0}^\infty \frac{S^{2k}}{(2k)!} + \sum_{k=0}^\infty \frac{S^{2k+1}}{(2k+1)!} \\
+      &=
+      \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+      \end{pmatrix}
+      \sum_{k=0}^\infty \frac{η^{2k}}{(2k)!} \\
+      &+
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix}
+      \sum_{k=0}^\infty \frac{η^{2k+1}}{(2k+1)!} \\
+      &=
+      \begin{pmatrix}
+        \cosh η & \sinh η \\
+        \sinh η & \cosh η
+      \end{pmatrix}
+    \end{align*}
+    Now let $v\define \tanh η$ be the velocity related to the rapidity η.
+    Then the relations for the relative velocity β and the Lorentz factor γ can be written in the following form by using some rules for computing hyperbolic functions.
+    \begin{align*}
+      β &= v = \tanh η \\
+      γ &= \frac{1}{\sqrt{1-β^2}} = \frac{1}{\sqrt{1-\tanh^2η}} = \cosh η \\
+      βγ &= \tanh η \cosh η = \sinh η
+    \end{align*}
+    Let $\transpose{(t',x',y',z')} \define L\transpose{(t,x,y,z)}$.
+    In this case we get the following.
+    \begin{align*}
+      t' &= γ\roundBrackets{t + βz} \\
+      x' &= x \\
+      y' &= y \\
+      z' &= γ\roundBrackets{z + βt}
+    \end{align*}
+    By definition this is an inverse Lorentz boost with velocity $\vector{v}\define (0,0,v)$.
+    Hence, $L$ is a Lorentz boost with velocity $-\vector{v}$.
+
+    \paragraph{(4):}
+    The Noether currents $\mathscr{J}^{ijk}$ were given by the symmetric energy-momentum tensor $\mathscr{T}^{pq}$.
+    \[
+      \mathscr{J}\indices{^{ijk}} = \frac{1}{2} \roundBrackets{ \mathscr{T}^{ij}x^k - \mathscr{T}^{ik}x^j }
+    \]
+    From the interpretation of the energy-momentum tensor we do know that $\vector{p} \define \roundBrackets{\mathscr{T}^{0α}}_α$ is the density of the linear momentum.
+    Furthermore we define the following.
+    \[
+      l^α \define -ε^{αβγ} \mathscr{J}^{0βγ}
+    \]
+    To make things a little bit easier, we recompute this expression by interchanging β and γ.
+    \[
+      ε^{αβγ}\mathscr{T}^{0β}x^γ = ε^{αγβ}\mathscr{T}^{0γ}x^β = - ε^{αβγ}\mathscr{T}^{0γ}x^β
+    \]
+    Therefore we can write $l^α$ in the following form.
+    \[
+      l^α = -ε^{αβγ} \mathscr{T}^{0β}x^γ
+    \]
+    Using the definition of the Levi-Civita symbol and the cross product we obtain
+    \[
+      \vector{l} = -\crossProduct{\vector{p}}{\vector{x}} = \crossProduct{\vector{x}}{\vector{p}}
+    \]
+    Therefore we can interpret $\vector{l}$ as density of the angular momentum.
+    Hence, the following integral $L^α$ has to be the total angular momentum.
+    \[
+      L^α = \integral{\setReal^4}{}{l^α(x)}{λ(x)}
+    \]
+
+  \end{multicols}
+  % section problem_9_lorentz_transformations (end)
+
+\end{document}
